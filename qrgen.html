@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="claude.css">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        #qrcode {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        #downloadBtn {
+            display: none;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>QR Code Generator (100% free and anonymous)</h1>
+
+    <div class="input-group">
+        <label for="url">Enter URL:</label>
+        <input type="url" id="url" placeholder="https://example.com" required>
+    </div>
+
+    <div class="input-group">
+        <label for="size">QR Code Size:</label>
+        <select id="size">
+            <option value="128">Small (128x128)</option>
+            <option value="256" selected>Medium (256x256)</option>
+            <option value="512">Large (512x512)</option>
+        </select>
+    </div>
+
+    <button onclick="generateQR()">Generate QR Code</button>
+    <button id="downloadBtn" onclick="downloadQR()">Download QR Code</button>
+
+    <div id="qrcode"></div>
+</div>
+
+<script>
+    let qr = null;
+
+    function generateQR() {
+        const url = document.getElementById('url').value;
+        const size = parseInt(document.getElementById('size').value);
+
+        if (!url) {
+            alert('Please enter a URL');
+            return;
+        }
+
+        // Clear previous QR code
+        document.getElementById('qrcode').innerHTML = '';
+
+        // Generate new QR code
+        qr = new QRCode(document.getElementById('qrcode'), {
+            text: url,
+            width: size,
+            height: size,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        // Show download button
+        document.getElementById('downloadBtn').style.display = 'block';
+    }
+
+    function downloadQR() {
+        const canvas = document.querySelector('#qrcode canvas');
+        if (!canvas) return;
+
+        // Convert canvas to blob
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'qrcode.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    }
+</script>
+</body>
+</html>
