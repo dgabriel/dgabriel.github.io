@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="claude.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h1>Image to PDF Converter</h1>
+<input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" />
+<button id="convertBtn">Convert to PDF</button>
+
+<p>This tool was created with <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> using the following prompt:<br/>
+    <code>Please build a tool in html and javascript that can be hosted on github pages that turns an image (jpeg, gif, or png) into a pdf file.
+        Please combine the html and javascript in a single file.</code>
+</p>
+<br/>
+<br/>
+<i>View source and steal this code!  No rights reserved.</i>
+
+<script>
+    // Ensure jsPDF is available in the global scope
+    window.jsPDF = window.jspdf.jsPDF;
+
+    document.getElementById('convertBtn').addEventListener('click', function() {
+        const fileInput = document.getElementById('imageInput');
+        if (fileInput.files.length === 0) {
+            alert('Please select an image file.');
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            const img = new Image();
+            img.src = event.target.result;
+
+            img.onload = function() {
+                const pdf = new jsPDF();
+                const width = pdf.internal.pageSize.getWidth();
+                const height = pdf.internal.pageSize.getHeight();
+
+                // Calculate aspect ratio to fit the image within the PDF page
+                const aspectRatio = img.width / img.height;
+                let imgWidth = width;
+                let imgHeight = width / aspectRatio;
+
+                if (imgHeight > height) {
+                    imgHeight = height;
+                    imgWidth = height * aspectRatio;
+                }
+
+                // Add image to PDF
+                pdf.addImage(img, 'JPEG', (width - imgWidth) / 2, (height - imgHeight) / 2, imgWidth, imgHeight);
+                pdf.save('converted.pdf');
+            };
+        };
+
+        reader.readAsDataURL(file);
+    });
+</script>
+</body>
+</html>
