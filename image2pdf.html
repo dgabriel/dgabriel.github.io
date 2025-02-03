@@ -8,13 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="claude.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            font-size: 24px;
-        }
         input[type="file"] {
             margin-bottom: 10px;
         }
@@ -24,25 +17,43 @@
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 5px;
         }
         button:hover {
             background-color: #0056b3;
+        }
+        .action {
+            padding: 20px;
+            border: 1px solid #666;
+            background: white;
+            margin: 20px 0;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 <h1>Image to PDF Converter</h1>
-<input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" />
-<button id="convertBtn">Convert to PDF</button>
-
+<h2>100% free and anonymous</h2>
+<p>
+    Inspired by a mathematics class at Harvard Extension school that
+    required students to upload a pdf of completed homework.  Most people
+    downloaded a freemium phone app to do that, eventually accidentally paying 9.99 a month
+    when they forgot to end the trial.  I wrote a python script that no one else
+    in my study group had the skill to use.
+</p>
+<div class="action">
+    <b>Upload your image</b><br/>
+        <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" />
+        <button id="convertBtn">Convert to PDF</button>
+</div>
 <p>This tool was created with <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> using the following prompt:<br/>
     <code>Please build a tool in html and javascript that can be hosted on github pages that turns an image (jpeg, gif, or png) into a pdf file.
         Please combine the html and javascript in a single file.</code>
 </p>
-<br/>
-<br/>
 <i>View source and steal this code!  No rights reserved.</i>
-
+<footer>
+    <p><a href="index.html">Dawn Gabriel on GitHub (dgabriel.github.io)</a></p>
+</footer>
 <script>
     // Ensure jsPDF is available in the global scope
     window.jsPDF = window.jspdf.jsPDF;
