@@ -50,6 +50,10 @@ p {
     opacity: 0.9;
 }
 
+code {
+    font-size: 1.1rem;
+}
+
 a {
     color: var(--accent-color);
     text-decoration: none;
