@@ -5,82 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <link rel="stylesheet" href="claude.css">
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .input-group {
-            margin-bottom: 1rem;
-        }
-        input, select {
-            width: 100%;
-            padding: 0.5rem;
-            margin-top: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #0066cc;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0052a3;
-        }
-        #qrcode {
-            margin-top: 2rem;
-            text-align: center;
-        }
-        #downloadBtn {
-            display: none;
-            margin-top: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-    <h1>QR Code Generator</h1>
-    <h2>100% free and anonymous</h2>
-    <div class="input-group">
-        <label for="url">Enter URL:</label>
-        <input type="url" id="url" placeholder="https://example.com" required>
-    </div>
+<header class="site-header">
+    <a class="home-link" href="index.html">Dawn Gabriel</a>
+</header>
+<a class="back-link" href="index.html">&larr; Back</a>
+<h1>QR Code Generator</h1>
+<p class="subtitle">Free, no account required.</p>
 
-    <div class="input-group">
-        <label for="size">QR Code Size:</label>
-        <select id="size">
-            <option value="128">Small (128x128)</option>
-            <option value="256" selected>Medium (256x256)</option>
-            <option value="512">Large (512x512)</option>
-        </select>
-    </div>
+<div class="panel">
+    <label for="url">URL</label>
+    <input type="url" id="url" placeholder="https://example.com" required>
 
-    <button onclick="generateQR()">Generate QR Code</button>
-    <button id="downloadBtn" onclick="downloadQR()">Download QR Code</button>
+    <label for="size">Size</label>
+    <select id="size">
+        <option value="128">Small (128x128)</option>
+        <option value="256" selected>Medium (256x256)</option>
+        <option value="512">Large (512x512)</option>
+    </select>
+
+    <button onclick="generateQR()">Generate</button>
+    <button id="downloadBtn" style="display:none" onclick="downloadQR()">Download</button>
 
     <div id="qrcode"></div>
-    <br/>
-    <br/>
-    <i>View source and steal this code!  No rights reserved.</i>
 </div>
-
-<footer>
-    <p><a href="index.html">Dawn Gabriel on GitHub (dgabriel.github.io)</a></p>
-</footer>
 
 <script>
     let qr = null;
@@ -94,10 +44,8 @@
             return;
         }
 
-        // Clear previous QR code
         document.getElementById('qrcode').innerHTML = '';
 
-        // Generate new QR code
         qr = new QRCode(document.getElementById('qrcode'), {
             text: url,
             width: size,
@@ -107,15 +55,13 @@
             correctLevel: QRCode.CorrectLevel.H
         });
 
-        // Show download button
-        document.getElementById('downloadBtn').style.display = 'block';
+        document.getElementById('downloadBtn').style.display = 'inline-block';
     }
 
     function downloadQR() {
         const canvas = document.querySelector('#qrcode canvas');
         if (!canvas) return;
 
-        // Convert canvas to blob
         canvas.toBlob(function(blob) {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');

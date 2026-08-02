@@ -6,49 +6,23 @@
     <title>Image to PDF Converter</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="claude.css">
-    <style>
-        input[type="file"] {
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .action {
-            padding: 20px;
-            border: 1px solid #666;
-            background: white;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header class="site-header">
+    <a class="home-link" href="index.html">Dawn Gabriel</a>
+</header>
+<a class="back-link" href="index.html">&larr; Back</a>
 <h1>Image to PDF Converter</h1>
-<h2>100% free and anonymous</h2>
-<div class="action">
-    <b>Upload your image</b><br/>
-        <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" />
-        <button id="convertBtn">Convert to PDF</button>
+<p class="subtitle">Free, no account required.</p>
+
+<div class="panel">
+    <label for="imageInput">Upload an image</label>
+    <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" />
+    <button id="convertBtn">Convert to PDF</button>
 </div>
-<p>This tool was created with <a href="https://www.deepseek.com/" target="_blank">DeepSeek</a> using the following prompt:<br/>
-    <code>Please build a tool in html and javascript that can be hosted on github pages that turns an image (jpeg, gif, or png) into a pdf file.
-        Please combine the html and javascript in a single file.</code>
-</p>
-<i>View source and steal this code!  No rights reserved.</i>
-<footer>
-    <p><a href="index.html">Dawn Gabriel on GitHub (dgabriel.github.io)</a></p>
-</footer>
+
 <script>
-    // Ensure jsPDF is available in the global scope
     window.jsPDF = window.jspdf.jsPDF;
 
     document.getElementById('convertBtn').addEventListener('click', function() {
@@ -70,7 +44,6 @@
                 const width = pdf.internal.pageSize.getWidth();
                 const height = pdf.internal.pageSize.getHeight();
 
-                // Calculate aspect ratio to fit the image within the PDF page
                 const aspectRatio = img.width / img.height;
                 let imgWidth = width;
                 let imgHeight = width / aspectRatio;
@@ -80,7 +53,6 @@
                     imgWidth = height * aspectRatio;
                 }
 
-                // Add image to PDF
                 pdf.addImage(img, 'JPEG', (width - imgWidth) / 2, (height - imgHeight) / 2, imgWidth, imgHeight);
                 pdf.save('converted.pdf');
             };
