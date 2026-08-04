@@ -98,4 +98,13 @@ document.addEventListener('DOMContentLoaded', function () {
         printRow();
     });
 
+    // Build the mailto link at runtime so the address isn't sitting in
+    // the page source for scrapers to harvest.
+    var contactLink = document.getElementById('contact-link');
+    if (contactLink) {
+        var address = contactLink.getAttribute('data-user') + '@' + contactLink.getAttribute('data-domain');
+        contactLink.href = 'mailto:' + address;
+        contactLink.textContent = address;
+    }
+
 });
