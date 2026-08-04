@@ -107,4 +107,23 @@ document.addEventListener('DOMContentLoaded', function () {
         contactLink.textContent = address;
     }
 
+    // Negative/positive toggle: flips the whole page like a film negative.
+    var INVERT_KEY = 'dg-invert';
+    var toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'mode-toggle';
+
+    function syncLabel() {
+        toggle.textContent = document.documentElement.classList.contains('inverted') ? 'POSITIVE' : 'NEGATIVE';
+    }
+
+    toggle.addEventListener('click', function () {
+        var inverted = document.documentElement.classList.toggle('inverted');
+        localStorage.setItem(INVERT_KEY, inverted ? '1' : '0');
+        syncLabel();
+    });
+
+    syncLabel();
+    document.body.appendChild(toggle);
+
 });
