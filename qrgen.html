@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
-    <a class="home-link" href="index.html">Dawn Gabriel</a>
-</header>
-<a class="back-link" href="index.html">&larr; Back</a>
+<div class="ticker" data-pattern="*~*~*~*~*~*~*~*~*~*~"></div>
+<nav class="site-nav"><a href="index.html">:: DAWN GABRIEL ::</a></nav>
+<a class="back-link" href="index.html">&lt;&lt; BACK</a>
+
 <h1>QR Code Generator</h1>
-<p class="subtitle">Free, no account required.</p>
+<p class="subtitle" data-typewriter="FREE. NO ACCOUNT REQUIRED.">FREE. NO ACCOUNT REQUIRED.</p>
 
 <div class="panel">
     <label for="url">URL</label>
@@ -32,6 +33,9 @@
     <div id="qrcode"></div>
 </div>
 
+<div class="ticker" data-pattern="*~*~*~*~*~*~*~*~*~*~"></div>
+
+<script src="script.js"></script>
 <script>
     let qr = null;
 

@@ -6,15 +6,16 @@
     <title>Image to PDF Converter</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
-    <a class="home-link" href="index.html">Dawn Gabriel</a>
-</header>
-<a class="back-link" href="index.html">&larr; Back</a>
+<div class="ticker" data-pattern="*~*~*~*~*~*~*~*~*~*~"></div>
+<nav class="site-nav"><a href="index.html">:: DAWN GABRIEL ::</a></nav>
+<a class="back-link" href="index.html">&lt;&lt; BACK</a>
+
 <h1>Image to PDF Converter</h1>
-<p class="subtitle">Free, no account required.</p>
+<p class="subtitle" data-typewriter="FREE. NO ACCOUNT REQUIRED.">FREE. NO ACCOUNT REQUIRED.</p>
 
 <div class="panel">
     <label for="imageInput">Upload an image</label>
@@ -22,6 +23,9 @@
     <button id="convertBtn">Convert to PDF</button>
 </div>
 
+<div class="ticker" data-pattern="*~*~*~*~*~*~*~*~*~*~"></div>
+
+<script src="script.js"></script>
 <script>
     window.jsPDF = window.jspdf.jsPDF;
 
