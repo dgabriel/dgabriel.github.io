@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
     toggle.className = 'mode-toggle';
 
     function syncLabel() {
-        toggle.textContent = document.documentElement.classList.contains('inverted') ? 'POSITIVE' : 'NEGATIVE';
+        toggle.textContent = document.documentElement.classList.contains('inverted') ? 'LIGHT' : 'DARK';
     }
 
     toggle.addEventListener('click', function () {
