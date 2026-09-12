@@ -27,6 +27,13 @@
         #fileList .name { flex: 1; word-break: break-all; }
         #fileList button { background: none; border: none; cursor: pointer; font-size: 1.1rem; }
         #status { margin: 1rem 0; }
+        .advanced { margin: 1rem 0; }
+        .advanced summary { cursor: pointer; user-select: none; font-weight: bold; }
+        .advanced[open] summary { margin-bottom: 0.75rem; }
+        .advanced .field { margin: 0.5rem 0; }
+        .advanced label { display: inline-block; }
+        .advanced input[type="range"] { vertical-align: middle; }
+        .advanced .row label { min-width: 12rem; }
     </style>
 </head>
 <body>
@@ -46,6 +53,22 @@
 
     <ul id="fileList"></ul>
 
+    <details class="advanced">
+      <summary>Advanced</summary>
+      <div class="field row">
+        <label for="maxDim">Max dimension (px):</label>
+        <input type="number" id="maxDim" value="1600" min="200" step="100">
+        <span class="note">Downscales large images to keep the PDF small. 0 = no downscale.</span>
+      </div>
+      <div class="field row">
+        <label for="quality">JPEG quality: <span id="qualityVal">70</span>%</label>
+        <input type="range" id="quality" min="10" max="100" value="70">
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="keepOriginal"> Keep JPEG/PNG originals (lossless, larger)</label>
+      </div>
+    </details>
+
     <button id="convertBtn" disabled>Convert to PDF</button>
     <p id="status"></p>
 </div>
@@ -61,6 +84,12 @@
     const fileListEl = document.getElementById('fileList');
     const convertBtn = document.getElementById('convertBtn');
     const statusEl = document.getElementById('status');
+    const maxDimEl = document.getElementById('maxDim');
+    const qualityEl = document.getElementById('quality');
+    const qualityValEl = document.getElementById('qualityVal');
+    const keepOriginalEl = document.getElementById('keepOriginal');
+
+    qualityEl.addEventListener('input', () => { qualityValEl.textContent = qualityEl.value; });
 
     let files = [];
 
@@ -137,14 +166,36 @@
         }));
     }
 
-    // Render any image element to a canvas and export as JPEG data URL,
-    // so jsPDF can embed formats it doesn't natively support.
-    function toJpegDataUrl(img) {
+    // Render an image element to a canvas, optionally downscaling to maxDim,
+    // and export as a JPEG data URL at the given quality (0..1).
+    function toJpegDataUrl(img, maxDim, quality) {
+        let w = img.naturalWidth, h = img.naturalHeight;
+        if (maxDim > 0 && (w > maxDim || h > maxDim)) {
+            const scale = maxDim / Math.max(w, h);
+            w = Math.round(w * scale);
+            h = Math.round(h * scale);
+        }
         const canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        canvas.getContext('2d').drawImage(img, 0, 0);
-        return canvas.toDataURL('image/jpeg', 0.92);
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        return canvas.toDataURL('image/jpeg', quality);
+    }
+
+    // Read a File as a data URL (used to embed JPEG/PNG originals untouched).
+    function readFileAsDataUrl(file) {
+        return new Promise((resolve, reject) => {
+            const r = new FileReader();
+            r.onload = () => resolve(r.result);
+            r.onerror = () => reject(new Error('Could not read ' + file.name));
+            r.readAsDataURL(file);
+        });
+    }
+
+    function originalFormat(file) {
+        if (file.type === 'image/png' || /\.png$/i.test(file.name)) return 'PNG';
+        if (file.type === 'image/jpeg' || /\.(jpe?g)$/i.test(file.name)) return 'JPEG';
+        return null; // not a natively-embeddable original
     }
 
     convertBtn.addEventListener('click', async () => {
@@ -152,21 +203,36 @@
         convertBtn.disabled = true;
         statusEl.textContent = 'Converting\u2026';
 
+        const maxDim = parseInt(maxDimEl.value, 10) || 0;
+        const quality = (parseInt(qualityEl.value, 10) || 70) / 100;
+        const keepOriginal = keepOriginalEl.checked;
+
         const pdf = new jsPDF();
         const pageW = pdf.internal.pageSize.getWidth();
         const pageH = pdf.internal.pageSize.getHeight();
 
         try {
             for (let i = 0; i < files.length; i++) {
+                const file = files[i];
                 statusEl.textContent = `Converting\u2026 (${i + 1}/${files.length})`;
-                const img = await loadImage(files[i]);
-                const dataUrl = toJpegDataUrl(img);
+                const img = await loadImage(file);
+
+                let dataUrl, format;
+                const origFmt = originalFormat(file);
+                if (keepOriginal && origFmt && !isHeic(file)) {
+                    dataUrl = await readFileAsDataUrl(file);
+                    format = origFmt;
+                } else {
+                    dataUrl = toJpegDataUrl(img, maxDim, quality);
+                    format = 'JPEG';
+                }
+
                 const aspect = img.naturalWidth / img.naturalHeight;
                 let w = pageW, h = pageW / aspect;
                 if (h > pageH) { h = pageH; w = pageH * aspect; }
                 const x = (pageW - w) / 2, y = (pageH - h) / 2;
                 if (i > 0) pdf.addPage();
-                pdf.addImage(dataUrl, 'JPEG', x, y, w, h);
+                pdf.addImage(dataUrl, format, x, y, w, h);
             }
             pdf.save('converted.pdf');
             statusEl.textContent = 'Done.';
