@@ -26,7 +26,7 @@
 
 % Role header: Employer — Title \hfill Dates
 \newcommand{\role}[4]{%
-  \vspace{5pt}\textbf{#1} --- #2 \hfill {\small #3}\par
+  \vspace{5pt}\textbf{#1}\ifx&#2&\else\ \textbar\ #2\fi \hfill {\small #3}\par
   \ifx&#4&\else{\small\itshape #4}\par\fi
   \vspace{1pt}}
 
@@ -38,12 +38,12 @@
 % ===================== HEADER =====================
 {\fontsize{19}{21}\selectfont\bfseries DAWN GABRIEL}\\[3pt]
 {\small Brooklyn, NY ~\textbar~ \href{mailto:dgabriel@gmail.com}{dgabriel@gmail.com} ~\textbar~ 617-871-9686 ~\textbar~ \href{https://www.linkedin.com/in/dawn-gabriel-3948946}{linkedin.com/in/dawn-gabriel-3948946} ~\textbar~ \href{https://www.dawngabriel.com}{dawngabriel.com}}\\[4pt]
-{\normalsize\bfseries Engineering Leader --- Enterprise AI Deployment \& Agentic Systems}
+{\normalsize\bfseries Engineering Leader \textbar{} Enterprise AI Deployment \& Agentic Systems}
 
 % ===================== SUMMARY =====================
 \section*{Summary}
 {\small
-Engineering leader and hands-on builder with 20+ years shipping enterprise software and 2+ years managing engineering teams of up to 20, spanning consulting, higher education, and independent product development. Owns customer-facing delivery end to end --- technical strategy, security standards, implementation through ongoing operations --- in security- and compliance-constrained environments across public sector, finance, and healthcare. Builds and evaluates agentic systems firsthand: directed production LLM deployments with automated adversarial-evaluation release gates; created Flaught, an open-source adversarial AI code-review agent; delivers client platforms at 4x prior speed using AI-generated PRDs, test plans, and requirements traceability. High agency; known for translating between engineers and executives and for bringing agentic solutions into every step of the development process.
+Engineering leader and hands-on builder with 20+ years shipping enterprise software and 2+ years managing engineering teams of up to 20, spanning consulting, higher education, and independent product development. Owns customer-facing delivery end to end, from technical strategy and security standards through implementation and ongoing operations, in security- and compliance-constrained environments across public sector, finance, and healthcare. Builds and evaluates agentic systems firsthand: directed production LLM deployments with automated adversarial-evaluation release gates; created Flaught, an open-source adversarial AI code-review agent; delivers client platforms at 4x prior speed using AI-generated PRDs, test plans, and requirements traceability. High agency; known for translating between engineers and executives and for bringing agentic solutions into every step of the development process.
 }
 
 % ===================== SKILLS =====================
@@ -60,14 +60,14 @@ Engineering leader and hands-on builder with 20+ years shipping enterprise softw
 \section*{Experience}
 
 \role{EY (Ernst \& Young)}{Manager, Technical Consulting}{Apr 2024 -- Present | New York, NY}{%
-Lead AI adoption and engineering delivery for city and state government clients --- from technical strategy and security standards through implementation and ongoing operations --- across cross-functional teams of up to 20 (engineering, business analysis, QA).}
+Lead AI adoption and engineering delivery for city and state government clients, from technical strategy and security standards through implementation and ongoing operations, across cross-functional teams of up to 20 (engineering, business analysis, QA).}
 
 \subgroup{Production AI Systems \& Agentic Delivery}
 \begin{itemize}
-  \item Directed development and adversarial evaluation of NYC's MyCity business chatbot (Azure, Python/Flask, OpenAI); set the release-gating standard --- no model or prompt change ships without passing an automated adversarial evaluation pipeline --- and directed the infrastructure migration to Terraform IaC.
-  \item Leading AI-assisted, spec-driven delivery of a statewide disaster-recovery grants platform (Azure, Microsoft Power Platform) with a 20-person cross-functional team, using LLMs to generate PRDs, test plans, tickets, and requirements traceability --- achieving 4x delivery speed compared with similar engagements.
+  \item Defined the release-gating standard for production LLM features: no model or prompt change ships without passing an automated adversarial evaluation pipeline (Azure, Python/Flask, OpenAI); directed migration of the supporting infrastructure to Terraform IaC.
+  \item Leading AI-assisted, spec-driven delivery of a statewide disaster-recovery grants platform (Azure, Microsoft Power Platform) with a 20-person cross-functional team, using LLMs to generate PRDs, test plans, tickets, and requirements traceability, achieving 4x delivery speed compared with similar engagements.
   \item Built an agent that generates daily executive delivery dashboards, replacing 30--60 minutes of manual reporting per update.
-  \item Scoped and directed a Microsoft Copilot agent for the NYC Department of Education Risk team to normalize reporting over standardized document sets --- projected savings of 60+ hours per quarter over manual review.
+  \item Scoped and directed a Microsoft Copilot agent for the NYC Department of Education Risk team to normalize reporting over standardized document sets, with projected savings of 60+ hours per quarter over manual review.
   \item Led 8 engineers building AI Workbench, an internal platform that prioritizes and scopes AI consulting engagements (Spring Boot, PostgreSQL, Azure, Angular).
 \end{itemize}
 
@@ -80,9 +80,9 @@ Lead AI adoption and engineering delivery for city and state government clients 
 \end{itemize}
 
 \role{Independent AI Product Development}{Founder \& Hands-On Builder}{2023 -- Present | Brooklyn, NY}{%
-Own products end to end --- problem definition and personas through PRDs, technical design, implementation, and launch --- as a standing agentic-development practice.}
+Own products end to end (problem definition and personas through PRDs, technical design, implementation, and launch) as a standing agentic-development practice.}
 \begin{itemize}
-  \item \textbf{Flaught} (open source --- \href{https://flaught.github.io}{flaught.github.io}): adversarial CI code-review agent built to catch what LLM-assisted development loops miss --- vacuous tests, out-of-scope changes, findings that vary run to run. Model-agnostic swappable-LLM architecture; deterministic tools (Semgrep, linters, vulnerability scanners) as non-negotiable pipeline gates; persisted, explicit rationale required to dismiss flagged findings. Adopted into an internal EY AI development toolkit after advocating for its inclusion. (TypeScript)
+  \item \textbf{Flaught} (open source, \href{https://flaught.github.io}{flaught.github.io}): adversarial CI code-review agent built to catch what LLM-assisted development loops miss: vacuous tests, out-of-scope changes, findings that vary run to run. Model-agnostic swappable-LLM architecture; deterministic tools (Semgrep, linters, vulnerability scanners) as non-negotiable pipeline gates; persisted, explicit rationale required to dismiss flagged findings. Adopted into an internal EY AI development toolkit after advocating for its inclusion. (TypeScript)
   \item \textbf{MysteryMixClub}: streaming-service-agnostic music-discovery PWA taken from concept to beta across web and iOS; iOS port completed in days using Claude Code and Codex (Python, React, PostgreSQL).
   \item \textbf{tktk}: multi-tenant micro-LMS for writing workshops, built directly with poet customers on near-zero budgets (Cloudflare Workers, Hono, D1/Drizzle, htmx).
 \end{itemize}
@@ -104,15 +104,15 @@ Own products end to end --- problem definition and personas through PRDs, techni
 \role{Early Career}{}{1996 -- 2007}{}
 \begin{itemize}
   \item 8th employee at Spinners, Inc., the first startup of future Wayfair founders Niraj Shah and Steve Conine.
-  \item Software engineer, Stumpworld Systems --- e-commerce platforms for clients including Phish, Kiss, and Aerosmith.
+  \item Software engineer, Stumpworld Systems: e-commerce platforms for clients including Phish, Kiss, and Aerosmith.
   \item Senior engineering roles at American Well (telehealth infrastructure), Aspen Technology (enterprise inventory systems), and Virtual Text (early digital publishing tools).
 \end{itemize}
 
 % ===================== PRESENTATIONS =====================
 \section*{Presentations}
 \begin{itemize}
-  \item ``Leveraging Generative AI to Negotiate Software Development Priorities'' --- Lightning talk, Grace Hopper Celebration, Sep 2023.
-  \item Spec-driven AI development methodology --- recurring internal presentations and evangelism to EY partners, principals, and managing directors (2024--present).
+  \item ``Leveraging Generative AI to Negotiate Software Development Priorities'' (lightning talk), Grace Hopper Celebration, Sep 2023.
+  \item Spec-driven AI development methodology: recurring internal presentations and evangelism to EY partners, principals, and managing directors (2024--present).
 \end{itemize}
 
 \end{document}
