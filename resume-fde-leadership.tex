@@ -1,0 +1,118 @@
+% Dawn Gabriel — Resume (FDE / Applied-AI Engineering Leadership)
+% Tailored for: Cohere — EM, FDE Agentic Platform (reusable for Harvey, Baseten, Decagon)
+% Build: tectonic Dawn_Gabriel_Resume_FDE_Leadership.tex
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[letterpaper,left=0.62in,right=0.62in,top=0.45in,bottom=0.5in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Helvetica Neue}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+\definecolor{rulegray}{HTML}{444444}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% Section styling: bold, ruled, tight
+\titleformat{\section}{\bfseries\fontsize{11}{12.5}\selectfont}{}{0pt}{}[{\color{rulegray}\titlerule[0.7pt]}]
+\titlespacing*{\section}{0pt}{8pt}{3.5pt}
+
+% Compact bullets
+\setlist[itemize]{leftmargin=1.1em,itemsep=1.6pt,topsep=2.5pt,parsep=0pt,label=\textbullet}
+
+% Role header: Employer — Title \hfill Dates
+\newcommand{\role}[4]{%
+  \vspace{5pt}\textbf{#1} --- #2 \hfill {\small #3}\par
+  \ifx&#4&\else{\small\itshape #4}\par\fi
+  \vspace{1pt}}
+
+% Sub-group label inside a role
+\newcommand{\subgroup}[1]{\vspace{3pt}{\small\bfseries\itshape #1}\par\vspace{1pt}}
+
+\begin{document}
+
+% ===================== HEADER =====================
+{\fontsize{19}{21}\selectfont\bfseries DAWN GABRIEL}\\[3pt]
+{\small Brooklyn, NY ~\textbar~ \href{mailto:dgabriel@gmail.com}{dgabriel@gmail.com} ~\textbar~ 617-871-9686 ~\textbar~ \href{https://www.linkedin.com/in/dawn-gabriel-3948946}{linkedin.com/in/dawn-gabriel-3948946} ~\textbar~ \href{https://www.dawngabriel.com}{dawngabriel.com}}\\[4pt]
+{\normalsize\bfseries Engineering Leader --- Enterprise AI Deployment \& Agentic Systems}
+
+% ===================== SUMMARY =====================
+\section*{Summary}
+{\small
+Engineering leader and hands-on builder with 20+ years shipping enterprise software and 2+ years managing engineering teams of up to 20, spanning consulting, higher education, and independent product development. Owns customer-facing delivery end to end --- technical strategy, security standards, implementation through ongoing operations --- in security- and compliance-constrained environments across public sector, finance, and healthcare. Builds and evaluates agentic systems firsthand: directed production LLM deployments with automated adversarial-evaluation release gates; created Flaught, an open-source adversarial AI code-review agent; delivers client platforms at 4x prior speed using AI-generated PRDs, test plans, and requirements traceability. High agency; known for translating between engineers and executives and for bringing agentic solutions into every step of the development process.
+}
+
+% ===================== SKILLS =====================
+\section*{Skills}
+{\small
+\textbf{AI \& Agentic Systems:} LLM application development, adversarial evaluation, release-gating pipelines, agent development (Claude, OpenAI, Microsoft Copilot), prompt engineering, model-agnostic architecture, spec-driven development, AI-assisted delivery (Claude Code, Codex, Copilot 365)\\[2pt]
+\textbf{Languages \& Frameworks:} Python, TypeScript/JavaScript, Java, Scala; Spring Boot, Flask, React, Angular, htmx\\[2pt]
+\textbf{Cloud \& Infrastructure:} AWS, Azure, Google Cloud; Terraform/IaC, Docker, CI/CD (GitHub Actions), Cloudflare Workers, Databricks (MLOps), Microsoft Power Platform\\[2pt]
+\textbf{Data:} PostgreSQL, MongoDB, DynamoDB, MySQL\\[2pt]
+\textbf{Leadership \& Delivery:} customer engagement ownership, cross-functional team leadership (up to 20), technical strategy and security/compliance standards, stakeholder and executive communication, pre-sales scoping, hiring and mentoring; public-sector compliance environments (FedRAMP, GSA contracting)
+}
+
+% ===================== EXPERIENCE =====================
+\section*{Experience}
+
+\role{EY (Ernst \& Young)}{Manager, Technical Consulting}{Apr 2024 -- Present | New York, NY}{%
+Lead AI adoption and engineering delivery for city and state government clients --- from technical strategy and security standards through implementation and ongoing operations --- across cross-functional teams of up to 20 (engineering, business analysis, QA).}
+
+\subgroup{Production AI Systems \& Agentic Delivery}
+\begin{itemize}
+  \item Directed development and adversarial evaluation of NYC's MyCity business chatbot (Azure, Python/Flask, OpenAI); set the release-gating standard --- no model or prompt change ships without passing an automated adversarial evaluation pipeline --- and directed the infrastructure migration to Terraform IaC.
+  \item Leading AI-assisted, spec-driven delivery of a statewide disaster-recovery grants platform (Azure, Microsoft Power Platform) with a 20-person cross-functional team, using LLMs to generate PRDs, test plans, tickets, and requirements traceability --- achieving 4x delivery speed compared with similar engagements.
+  \item Built an agent that generates daily executive delivery dashboards, replacing 30--60 minutes of manual reporting per update.
+  \item Scoped and directed a Microsoft Copilot agent for the NYC Department of Education Risk team to normalize reporting over standardized document sets --- projected savings of 60+ hours per quarter over manual review.
+  \item Led 8 engineers building AI Workbench, an internal platform that prioritizes and scopes AI consulting engagements (Spring Boot, PostgreSQL, Azure, Angular).
+\end{itemize}
+
+\subgroup{Platform Delivery \& Client Ownership}
+\begin{itemize}
+  \item Led delivery of a statewide disaster-recovery grants platform across forensics, case-management, and customer-service workstreams; the system has processed 1,300+ applications and \$88.45M in approved funding and is now in operations and maintenance.
+  \item Directed an 18-person engineering team for NYC's Office of Technology \& Innovation across the Small Business Services portal (AWS, Spring Boot, React) and an Adobe AEM CMS migration; set technical strategy and security standards.
+  \item Tech lead for a 6-engineer Databricks MLOps transformation kickoff for Vizient Healthcare (Python, Azure).
+  \item Translate EY's spec-driven AI delivery methodology into go-to-market materials for public-sector pursuits; grow delivery teams through candidate interviews, campus recruiting outreach, and mid-career hiring.
+\end{itemize}
+
+\role{Independent AI Product Development}{Founder \& Hands-On Builder}{2023 -- Present | Brooklyn, NY}{%
+Own products end to end --- problem definition and personas through PRDs, technical design, implementation, and launch --- as a standing agentic-development practice.}
+\begin{itemize}
+  \item \textbf{Flaught} (open source --- \href{https://flaught.github.io}{flaught.github.io}): adversarial CI code-review agent built to catch what LLM-assisted development loops miss --- vacuous tests, out-of-scope changes, findings that vary run to run. Model-agnostic swappable-LLM architecture; deterministic tools (Semgrep, linters, vulnerability scanners) as non-negotiable pipeline gates; persisted, explicit rationale required to dismiss flagged findings. Adopted into an internal EY AI development toolkit after advocating for its inclusion. (TypeScript)
+  \item \textbf{MysteryMixClub}: streaming-service-agnostic music-discovery PWA taken from concept to beta across web and iOS; iOS port completed in days using Claude Code and Codex (Python, React, PostgreSQL).
+  \item \textbf{tktk}: multi-tenant micro-LMS for writing workshops, built directly with poet customers on near-zero budgets (Cloudflare Workers, Hono, D1/Drizzle, htmx).
+\end{itemize}
+
+\role{Nuvalence (acquired by EY)}{Senior Software Engineer / Technical Lead}{Jan 2023 -- Apr 2024 | New York, NY}{}
+\begin{itemize}
+  \item Technical lead for NY State DMV online license and permit renewal (Java, Spring Boot, Google Cloud, Angular); led 5 engineers through post-acquisition knowledge transfer.
+  \item Technical lead for Ford Credit customer-identity work (Java, Spring Boot, Google Cloud); gathered stakeholder requirements, set engineering priorities, and secured team adoption of a two-week release cycle.
+\end{itemize}
+
+\role{Harvard Business School}{Principal Software Engineer / Technical Team Lead}{Jan 2008 -- Jan 2023 | Cambridge, MA}{}
+\begin{itemize}
+  \item Partnered directly with faculty to define product scope and prioritize iterations, translating research concepts into interactive learning experiences used across MBA and Executive Education programs; several products commercially licensed via Harvard Business Publishing.
+  \item Primary or sole developer of production simulations: transformed R/Python research models into production applications (Scala/Play, TypeScript, Java/Spring, Angular, SQL databases, MongoDB).
+  \item Led cross-functional front-end, DevOps, and data-science delivery against fixed, immovable academic deadlines; managed deployments to on-premises Linux servers before pivoting exclusively to AWS; provided live-event support for running classroom simulations.
+  \item Created the development department's code-review and ``Dev Complete'' standards; supervised and reviewed code from globally distributed development teams; mentored and managed Year Up interns and junior developers; served 24-hour on-call rotations.
+\end{itemize}
+
+\role{Early Career}{}{1996 -- 2007}{}
+\begin{itemize}
+  \item 8th employee at Spinners, Inc., the first startup of future Wayfair founders Niraj Shah and Steve Conine.
+  \item Software engineer, Stumpworld Systems --- e-commerce platforms for clients including Phish, Kiss, and Aerosmith.
+  \item Senior engineering roles at American Well (telehealth infrastructure), Aspen Technology (enterprise inventory systems), and Virtual Text (early digital publishing tools).
+\end{itemize}
+
+% ===================== PRESENTATIONS =====================
+\section*{Presentations}
+\begin{itemize}
+  \item ``Leveraging Generative AI to Negotiate Software Development Priorities'' --- Lightning talk, Grace Hopper Celebration, Sep 2023.
+  \item Spec-driven AI development methodology --- recurring internal presentations and evangelism to EY partners, principals, and managing directors (2024--present).
+\end{itemize}
+
+\end{document}
